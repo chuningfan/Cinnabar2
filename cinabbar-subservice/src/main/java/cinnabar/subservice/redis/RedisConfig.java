@@ -32,10 +32,10 @@ public class RedisConfig {
 	 * @return
 	 */
 	@Bean  
-    @ConditionalOnMissingBean(name = "redisTemplate")  
-    public RedisTemplate<Object, Object> redisTemplate(  
+    @ConditionalOnMissingBean(name = "cinnabarRedisHelper")  
+    public CinnabarRedisHelper<Object, Object> cinnabarRedisHelper(  
             RedisConnectionFactory redisConnectionFactory) {  
-        RedisTemplate<Object, Object> template = new RedisTemplate<>();  
+		CinnabarRedisHelper<Object, Object> template = new CinnabarRedisHelper<>();  
         Jackson2JsonRedisSerializer<?> redisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         template.setValueSerializer(redisSerializer);  
         template.setHashValueSerializer(redisSerializer);  
