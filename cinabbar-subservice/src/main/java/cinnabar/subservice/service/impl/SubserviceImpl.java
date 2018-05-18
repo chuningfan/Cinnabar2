@@ -68,4 +68,14 @@ public class SubserviceImpl implements Subservice {
 		return customDao.getUserBySql(sql, id);
 	}
 
+	@Override
+	public void saveUserToRedis(CinnabarUser user) {
+		customDao.saveUserToRedis(user);
+	}
+
+	@Override
+	public CinnabarUser getUserFromRedis(Long key) {
+		return customDao.getUserFromRedis(key);
+	}
+
 }

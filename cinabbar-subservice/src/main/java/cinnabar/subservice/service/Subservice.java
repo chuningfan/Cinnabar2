@@ -22,4 +22,8 @@ public interface Subservice {
 	CinnabarUser getUserByHql(Long id);
 	
 	CinnabarUser getUserBySql(Long id);
+	
+	void saveUserToRedis(CinnabarUser user);
+	
+	CinnabarUser getUserFromRedis(Long key);
 }

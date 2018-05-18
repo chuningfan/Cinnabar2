@@ -13,4 +13,8 @@ public interface CustomDao {
 	
 	CinnabarUser getUserBySql(String sql, Long id);
 	
+	void saveUserToRedis(CinnabarUser user);
+	
+	CinnabarUser getUserFromRedis(Long key);
+	
 }
