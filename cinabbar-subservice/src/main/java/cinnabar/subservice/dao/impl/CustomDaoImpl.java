@@ -11,9 +11,9 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import cinnabar.core.redis.RedisHelper;
 import cinnabar.subservice.dao.CustomDao;
 import cinnabar.subservice.entity.CinnabarUser;
-import cinnabar.subservice.redis.CinnabarRedisHelper;
 
 /**
  * 自定义dao 实现
@@ -33,7 +33,7 @@ public class CustomDaoImpl implements CustomDao {
 	 * 大意： 如果你为项目增加一个auto-config 的基于类型的bean， 那么这个bean就会替换掉默认的（如果有这个bean）bean， 但是redistemplate是基于名称的，并非基于类型的。
 	 */
 	@Resource
-	private CinnabarRedisHelper<String, CinnabarUser> cinnabarRedisHelper;
+	private RedisHelper<String, CinnabarUser> redisHelper;
 	
 	@Override
 	public CinnabarUser getUserByHql(String hql, Long id) {
@@ -64,7 +64,7 @@ public class CustomDaoImpl implements CustomDao {
 	 */
 	@Override
 	public void saveUserToRedis(CinnabarUser user) {
-		cinnabarRedisHelper.opsForValue().set(user.getId().toString(), user, 30, TimeUnit.SECONDS);
+		redisHelper.opsForValue().set(user.getId().toString(), user, 30, TimeUnit.SECONDS);
 	}
 
 	/**
@@ -84,10 +84,10 @@ public class CustomDaoImpl implements CustomDao {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
-		Object source = cinnabarRedisHelper.opsForValue().get(key.toString());
+		Object source = redisHelper.opsForValue().get(key.toString());
 		CinnabarUser user = null;
 		try {
-			user = cinnabarRedisHelper.getObject(source, CinnabarUser.class);
+			user = redisHelper.getObject(source, CinnabarUser.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
