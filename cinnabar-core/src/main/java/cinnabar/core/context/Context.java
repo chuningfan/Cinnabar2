@@ -1,5 +1,8 @@
 package cinnabar.core.context;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class Context {
 
 	private Long userId;
@@ -72,8 +75,8 @@ public class Context {
 		this.rememberMe = rememberMe;
 	}
 
-	public String toCookieString() {
-		return "userId=" + userId + ";userRole=" + userRole + ";loggedTime=" + 
-		loggedTime + ";ipAddress=" + ipAddress + ";redisId=" + redisId + ";rememberMe=" + rememberMe;
+	public String toCookieString() throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(this);
 	}
 }

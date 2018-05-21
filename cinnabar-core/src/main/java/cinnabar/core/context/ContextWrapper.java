@@ -1,5 +1,6 @@
 package cinnabar.core.context;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -14,10 +15,15 @@ import javax.servlet.http.Cookie;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class ContextWrapper {
 
 	public static Cookie getCookie(Context context, final String contextName, final String domain) throws InvalidKeyException, 
-	IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException {
+	IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException, JsonProcessingException {
 		String cookieString = context.toCookieString();
 		Cookie c = new Cookie(contextName, encryptVal(cookieString));
 		c.setDomain(domain);
@@ -41,28 +47,18 @@ public class ContextWrapper {
 	}
 	
 	public static Context decryptCookie(String cookieVal) throws IllegalBlockSizeException, BadPaddingException, 
-	InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException {
+	InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, JsonParseException, JsonMappingException, IOException {
 		KeyGenerator aesKeyGenerator = KeyGenerator.getInstance("aes");
         SecretKey aesSecretKey = aesKeyGenerator.generateKey();
 		Cipher aesCipher = Cipher.getInstance("aes");
 		aesCipher.init(Cipher.DECRYPT_MODE, aesSecretKey);
 		byte[] aseResultBytes = aesCipher.doFinal(cookieVal.getBytes());
 		String result = new String(aseResultBytes, "UTF-8");
-		Context context = new Context();
-		/*
-		 * "userId=" + userId + ";userRole=" + userRole + ";loggedTime=" + 
-		loggedTime + ";ipAddress=" + ipAddress + ";redisId=" + redisId + ";rememberMe=" + rememberMe;
-		 */
 		if (StringUtils.isBlank(result)) {
 			return null;
 		}
-		String[] keyValArray = result.split(";");
-		context.setUserId(Long.valueOf(keyValArray[0].split("=")[1]));
-		context.setUserRole(keyValArray[1].split("=")[1]);
-		context.setLoggedTime(keyValArray[2].split("=")[1]);
-		context.setIpAddress(keyValArray[3].split("=")[1]);
-		context.setRedisId(keyValArray[4].split("=")[1]);
-		context.setRememberMe(keyValArray[5].split("=")[1]);
+		ObjectMapper mapper = new ObjectMapper();
+		Context context = mapper.readValue(result, Context.class);
 		return context;
 	}
 	
