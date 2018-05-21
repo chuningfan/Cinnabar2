@@ -2,6 +2,7 @@ package cinnabar.core.context;
 
 import java.util.Date;
 
+import cinnabar.core.constant.ClientType;
 import cinnabar.core.organization.UserRole;
 
 public class Context {
@@ -15,6 +16,8 @@ public class Context {
 	private Date loggedTime;
 	
 	private Object redisId;
+	
+	private ClientType clientType;
 
 	public Long getUserId() {
 		return userId;
@@ -54,6 +57,14 @@ public class Context {
 
 	public void setRedisId(Object redisId) {
 		this.redisId = redisId;
+	}
+
+	public ClientType getClientType() {
+		return clientType;
+	}
+
+	public void setClientType(ClientType clientType) {
+		this.clientType = clientType;
 	}
 	
 }
