@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cinnabar.core.context.Context;
 import cinnabar.subservice.dto.User;
 import cinnabar.subservice.entity.CinnabarUser;
 import cinnabar.subservice.service.Subservice;
@@ -49,8 +51,8 @@ public class SubserviceController {
 		return cUser;
 	}
 	
-	@GetMapping("/get/{userId}")
-	public CinnabarUser getCinnabarUser(@PathVariable Long userId) {
+	@GetMapping("/get")
+	public CinnabarUser getCinnabarUser(@RequestParam Long userId) {
 		System.out.println("[getCinnabarUser] was called!");
 		CinnabarUser cUser = subservice.getCinnabarUser(userId);
 		return cUser;

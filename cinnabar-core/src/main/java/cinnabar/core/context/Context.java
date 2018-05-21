@@ -1,23 +1,20 @@
 package cinnabar.core.context;
 
-import java.util.Date;
-
-import cinnabar.core.constant.ClientType;
-import cinnabar.core.organization.UserRole;
-
 public class Context {
 
 	private Long userId;
 	
 	private String ipAddress;
 	
-	private UserRole role;
+	private String userRole;
 	
-	private Date loggedTime;
+	private String loggedTime;
 	
-	private Object redisId;
+	private String redisId;
 	
-	private ClientType clientType;
+	private String clientType;
+	
+	private String rememberMe;
 
 	public Long getUserId() {
 		return userId;
@@ -35,36 +32,48 @@ public class Context {
 		this.ipAddress = ipAddress;
 	}
 
-	public UserRole getRole() {
-		return role;
+	public String getUserRole() {
+		return userRole;
 	}
 
-	public void setRole(UserRole role) {
-		this.role = role;
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 
-	public Date getLoggedTime() {
+	public String getLoggedTime() {
 		return loggedTime;
 	}
 
-	public void setLoggedTime(Date loggedTime) {
+	public void setLoggedTime(String loggedTime) {
 		this.loggedTime = loggedTime;
+	}
+
+	public void setRedisId(String redisId) {
+		this.redisId = redisId;
 	}
 
 	public Object getRedisId() {
 		return redisId;
 	}
 
-	public void setRedisId(Object redisId) {
-		this.redisId = redisId;
-	}
-
-	public ClientType getClientType() {
+	public String getClientType() {
 		return clientType;
 	}
 
-	public void setClientType(ClientType clientType) {
+	public void setClientType(String clientType) {
 		this.clientType = clientType;
 	}
-	
+
+	public String getRememberMe() {
+		return rememberMe;
+	}
+
+	public void setRememberMe(String rememberMe) {
+		this.rememberMe = rememberMe;
+	}
+
+	public String toCookieString() {
+		return "userId=" + userId + ";userRole=" + userRole + ";loggedTime=" + 
+		loggedTime + ";ipAddress=" + ipAddress + ";redisId=" + redisId + ";rememberMe=" + rememberMe;
+	}
 }
