@@ -2,7 +2,7 @@ package cinnabar.core.configuration;
 
 public class InformationProvider {
 	
-	private static final String BASE_PACKAGE = "cinnabar.core.";
+	private static final String BASE_PACKAGE = "cinnabar.core.component";
 	
 	public static String getRedisConfigPackage() {
 		return BASE_PACKAGE + "redis";
