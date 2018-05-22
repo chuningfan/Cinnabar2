@@ -2,7 +2,10 @@ package cinnabar.core.constant;
 
 public enum UserStatus {
 	
-	ACTIVE("active"), DEACTIVE("deactive"), LOCKED("locked");
+	ACTIVE("active"), // available user
+	DEACTIVE("deactive"),  // unavailable user
+	LOCKED("locked"),  // user was locked
+	UNKNOWN("unkown"); // unknown
 	
 	private String val;
 	

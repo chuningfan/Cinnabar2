@@ -1,10 +1,10 @@
-package cinnabar.core.listener;
+package cinnabar.core.component.listener;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -12,10 +12,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import com.google.common.collect.Sets;
+import cinnabar.core.util.AuthenticationServiceURICollection;
 
-import cinnabar.core.util.ServiceUtils;
-
+/**
+ * Implicit listener
+ * 
+ * for providing Spring beans
+ * 
+ * @author Vic.Chu
+ *
+ */
 @WebListener("ServiceStartupListener")
 public class StartupListener implements ServletContextListener, ApplicationContextAware {
 
@@ -23,8 +29,8 @@ public class StartupListener implements ServletContextListener, ApplicationConte
 	
 	private static ApplicationContext CXT;
 	
-//	@Value(value="cinnabar.context.services")
-	private String contextServices = "/subservice/get";
+	@Value("cinnabar.auth.uris")
+	private String authenticationURIs;
 	
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
@@ -33,9 +39,9 @@ public class StartupListener implements ServletContextListener, ApplicationConte
 
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
-		if (!StringUtils.isBlank(contextServices)) {
-			String[] serviceArray = contextServices.split(",");
-			ServiceUtils.setServices(Sets.newHashSet(serviceArray));
+		String[] uris = authenticationURIs.split(",");
+		if (!ArrayUtils.isEmpty(uris)) {
+			AuthenticationServiceURICollection.setAll(uris);
 		}
 	}
 

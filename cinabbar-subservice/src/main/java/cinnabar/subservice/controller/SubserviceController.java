@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cinnabar.core.annotation.CinnabarContext;
 import cinnabar.core.context.Context;
 import cinnabar.subservice.dto.User;
 import cinnabar.subservice.entity.CinnabarUser;
@@ -39,7 +40,7 @@ public class SubserviceController {
 	
 	//REST POST，以此类推， 还有@RestPut  @RestDelete, 我没有写例子。
 	@PostMapping("/saveUser")
-	public User saveUser(@RequestBody User user) {
+	public User saveUser(@RequestBody User user, @CinnabarContext Context context) {
 		System.out.println("Method [saveUser] was called!");
 		return user;
 	}
@@ -52,7 +53,7 @@ public class SubserviceController {
 	}
 	
 	@GetMapping("/get")
-	public CinnabarUser getCinnabarUser(@RequestParam Long userId) {
+	public CinnabarUser getCinnabarUser(@RequestParam Long userId, @CinnabarContext Context context) {
 		System.out.println("[getCinnabarUser] was called!");
 		CinnabarUser cUser = subservice.getCinnabarUser(userId);
 		return cUser;

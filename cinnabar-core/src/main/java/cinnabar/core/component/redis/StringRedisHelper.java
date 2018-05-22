@@ -1,4 +1,4 @@
-package cinnabar.core.redis;
+package cinnabar.core.component.redis;
 
 import java.io.IOException;
 
@@ -9,6 +9,12 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * get object from string
+ * 
+ * @author Vic.Chu
+ *
+ */
 public class StringRedisHelper extends StringRedisTemplate {
 
 	public <T> T getObjectFromString(String source, Class<T> clazz) throws JsonParseException, JsonMappingException, IOException {

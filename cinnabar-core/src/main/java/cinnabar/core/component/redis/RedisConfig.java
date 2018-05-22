@@ -1,4 +1,4 @@
-package cinnabar.core.redis;
+package cinnabar.core.component.redis;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -11,6 +11,13 @@ import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+/**
+ * 
+ * Spring bean for redis operations
+ * 
+ * @author Vic.Chu
+ *
+ */
 @Configuration  
 @ConditionalOnClass(RedisOperations.class)  
 @EnableConfigurationProperties(RedisProperties.class)

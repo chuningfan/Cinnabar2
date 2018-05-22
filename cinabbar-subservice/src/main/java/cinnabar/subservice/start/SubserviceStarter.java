@@ -2,9 +2,9 @@ package cinnabar.subservice.start;
 
 import org.springframework.boot.SpringApplication;
 
-import cinnabar.core.annotation.Cinnabar;
+import cinnabar.core.annotation.CinnabarService;
 
-@Cinnabar(
+@CinnabarService(
 applicationInjectionPackages={"cinnabar.core.*", "cinnabar.subservice.*"}, 
 entityScanPackages="cinnabar.subservice.entity", 
 jpaRepositoryPackages="cinnabar.subservice.dao",

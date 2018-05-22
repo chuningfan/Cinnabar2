@@ -21,7 +21,7 @@ public class HttpUtils {
 			return null;
 		}
 		if (domain == null) {
-			domain = "/";
+			domain = "";
 		}
 		for (Cookie c: cookies) {
 			if (domain.equals(c.getDomain()) && keyName.equals(c.getName())) {

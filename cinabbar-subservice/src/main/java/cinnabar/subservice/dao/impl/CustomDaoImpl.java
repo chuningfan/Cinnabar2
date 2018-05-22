@@ -11,7 +11,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import cinnabar.core.redis.RedisHelper;
+import cinnabar.core.component.redis.RedisHelper;
 import cinnabar.subservice.dao.CustomDao;
 import cinnabar.subservice.entity.CinnabarUser;
 
