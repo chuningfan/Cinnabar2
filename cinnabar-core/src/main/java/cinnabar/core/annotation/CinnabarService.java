@@ -15,8 +15,8 @@ import org.springframework.core.annotation.AliasFor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
- * To resolve the complex annotation on Spring cloud.
- * collect most of common annotations
+ * To resolve the complex annotations on Spring boot starter.
+ * collect most of common used annotations
  * @author Vic.Chu
  *
  */
