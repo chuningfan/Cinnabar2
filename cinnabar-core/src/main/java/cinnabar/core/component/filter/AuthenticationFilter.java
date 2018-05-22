@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
@@ -43,6 +44,7 @@ import cinnabar.core.util.HttpUtils;
  *
  */
 @WebFilter(filterName="cinnabarFilter", urlPatterns="/*")
+@Order(0)
 public class AuthenticationFilter implements Filter {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AuthenticationFilter.class);
