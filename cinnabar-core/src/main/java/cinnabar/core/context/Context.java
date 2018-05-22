@@ -72,7 +72,11 @@ public class Context {
 		this.rememberMe = rememberMe;
 	}
 
-	public String toCookieString() {
-		return userId + "^&*" + ipAddress + "^&*" + userRole + "^&*" + loggedTime + "^&*" + redisId + "^&*" + clientType + "^&*" + rememberMe;
+	@Override
+	public String toString() {
+		return "Context [userId=" + userId + ", ipAddress=" + ipAddress + ", userRole=" + userRole + ", loggedTime="
+				+ loggedTime + ", redisId=" + redisId + ", clientType=" + clientType + ", rememberMe=" + rememberMe
+				+ "]";
 	}
+	
 }
