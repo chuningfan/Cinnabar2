@@ -11,6 +11,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.core.annotation.Order;
 
 import cinnabar.core.util.AuthenticationServiceURICollection;
 
@@ -23,6 +24,7 @@ import cinnabar.core.util.AuthenticationServiceURICollection;
  *
  */
 @WebListener("ServiceStartupListener")
+@Order(0)
 public class StartupListener implements ServletContextListener, ApplicationContextAware {
 
 	private static final Logger LOG = LoggerFactory.getLogger(StartupListener.class);

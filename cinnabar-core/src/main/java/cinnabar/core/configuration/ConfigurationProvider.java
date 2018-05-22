@@ -1,6 +1,6 @@
 package cinnabar.core.configuration;
 
-public class InformationProvider {
+public class ConfigurationProvider {
 	
 	private static final String BASE_PACKAGE = "cinnabar.core.component";
 	
