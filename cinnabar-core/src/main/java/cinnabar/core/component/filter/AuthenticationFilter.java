@@ -44,7 +44,7 @@ import cinnabar.core.util.HttpUtils;
  *
  */
 @WebFilter(filterName="cinnabarFilter", urlPatterns="/*")
-@Order(0)
+@Order(1)
 public class AuthenticationFilter implements Filter {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AuthenticationFilter.class);
