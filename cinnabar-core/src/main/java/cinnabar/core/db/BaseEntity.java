@@ -14,13 +14,13 @@ public class BaseEntity {
 	
 	private Long id;
 	
-	private String createdBy;
+	private String cb;
 	
-	private Date createdDate;
+	private Date cd;
 	
-	private String modifiedBy;
+	private String mb;
 	
-	private Date modifiedDate;
+	private Date md;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,45 +33,45 @@ public class BaseEntity {
 	}
 	
 	@Column(nullable=false, name="created_by")
-	public String getCreatedBy() {
-		return createdBy;
+	public String getCb() {
+		return cb;
 	}
 
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+	public void setCb(String cb) {
+		this.cb = cb;
 	}
 
 	@Column(nullable=false, name="created_date")
-	public Date getCreatedDate() {
-		return createdDate;
+	public Date getCd() {
+		return cd;
 	}
 
-	public void setCreatedDate(Date createdDate) {
-		if (createdDate == null) {
-			createdDate = new Date();
+	public void setCd(Date cd) {
+		if (cd == null) {
+			cd = new Date();
 		}
-		this.createdDate = createdDate;
+		this.cd = cd;
 	}
 
 	@Column(nullable=false, name="modified_by")
-	public String getModifiedBy() {
-		return modifiedBy;
+	public String getMb() {
+		return mb;
 	}
 
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
+	public void setMb(String mb) {
+		this.mb = mb;
 	}
 
 	@Column(nullable=false, name="modified_date")
-	public Date getModifiedDate() {
-		return modifiedDate;
+	public Date getMd() {
+		return md;
 	}
 
-	public void setModifiedDate(Date modifiedDate) {
-		if (modifiedDate == null) {
-			modifiedDate = new Date();
+	public void setMd(Date md) {
+		if (md == null) {
+			md = new Date();
 		}
-		this.modifiedDate = modifiedDate;
+		this.md = md;
 	}
 	
 }
