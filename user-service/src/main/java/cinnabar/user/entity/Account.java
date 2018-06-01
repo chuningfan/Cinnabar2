@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import cinnabar.core.constant.UserStatus;
@@ -11,7 +12,7 @@ import cinnabar.core.db.BaseEntity;
 import cinnabar.user.constant.PasswordStrength;
 
 @Entity
-@Table(name="users")
+@Table(name="accounts")
 public class Account extends BaseEntity {
 	
 	private String loginName;
@@ -23,6 +24,8 @@ public class Account extends BaseEntity {
 	private String loginPassword;
 	
 	private UserStatus userStatus;
+	
+	private User user;
 	
 	private PasswordStrength passwordStrength;
 
@@ -80,6 +83,15 @@ public class Account extends BaseEntity {
 
 	public void setPasswordStrength(PasswordStrength passwordStrength) {
 		this.passwordStrength = passwordStrength;
+	}
+
+	@OneToOne(mappedBy="account_id")
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 }

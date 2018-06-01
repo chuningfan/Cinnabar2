@@ -6,19 +6,17 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import cinnabar.core.db.BaseEntityWithoutID;
+import cinnabar.core.db.BaseEntity;
 
 @Entity
 @Table(name="users")
-@IdClass(Account.class)
-public class User extends BaseEntityWithoutID {
+public class User extends BaseEntity {
 	
 	private Long accountId;
 	
@@ -36,10 +34,12 @@ public class User extends BaseEntityWithoutID {
 	
 	private Long marketingId;
 	
+	private String IDCardNumber;
+	
 	private Set<Role> roles;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity=Role.class)
-    @JoinColumn(name = "account_id", referencedColumnName="id", insertable=true)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity=Account.class)
+    @JoinColumn(name = "account_id")
 	public Long getAccountId() {
 		return accountId;
 	}
@@ -114,6 +114,14 @@ public class User extends BaseEntityWithoutID {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getIDCardNumber() {
+		return IDCardNumber;
+	}
+
+	public void setIDCardNumber(String iDCardNumber) {
+		IDCardNumber = iDCardNumber;
 	}
 	
 }
