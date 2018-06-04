@@ -2,6 +2,7 @@ package cinnabar.core.util;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -12,7 +13,7 @@ public class HttpUtils {
 	private static final Logger LOG = LoggerFactory.getLogger(HttpUtils.class);
 	private static final String UNKNOWN_IP = "unknown";
 	
-	public static Cookie getCookieByName(HttpServletRequest request, String keyName, String domain) {
+	public static Cookie getCookieByName(HttpServletRequest request, String keyName, String domain, String path) {
 		Cookie[] cookies = request.getCookies();
 		if (cookies == null || cookies.length == 0) {
 			return null;
@@ -23,12 +24,28 @@ public class HttpUtils {
 		if (domain == null) {
 			domain = "";
 		}
+		if (path == null) {
+			path = "/";
+		}
 		for (Cookie c: cookies) {
 			if (domain.equals(c.getDomain()) && keyName.equals(c.getName())) {
 				return c;
 			}
 		}
 		return null;
+	}
+	
+	public static void writeCookie(HttpServletResponse resp, String keyName, String value, String domain, String path) {
+		Cookie cookie = new Cookie(keyName, value);
+		cookie.setDomain(domain);
+		if (domain == null) {
+			domain = "";
+		}
+		if (path == null) {
+			path = "/";
+		}
+		cookie.setPath(path);
+		resp.addCookie(cookie);
 	}
 	
 	public static String getIp(HttpServletRequest request) {

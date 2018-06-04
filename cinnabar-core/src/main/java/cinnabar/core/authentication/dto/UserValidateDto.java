@@ -1,6 +1,7 @@
 package cinnabar.core.authentication.dto;
 
 import cinnabar.core.constant.UserStatus;
+import cinnabar.core.organization.UserRole;
 
 public class UserValidateDto {
 	
@@ -11,6 +12,8 @@ public class UserValidateDto {
 	private UserStatus userStatus;
 	
 	private String redisId;
+	
+	private UserRole userRole;
 	
 
 	public UserValidateDto(String redisId) {
@@ -47,6 +50,14 @@ public class UserValidateDto {
 
 	public void setRedisId(String redisId) {
 		this.redisId = redisId;
+	}
+
+	public UserRole getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(UserRole userRole) {
+		this.userRole = userRole;
 	}
 	
 }

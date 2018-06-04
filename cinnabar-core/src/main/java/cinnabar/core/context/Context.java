@@ -1,20 +1,27 @@
 package cinnabar.core.context;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import cinnabar.core.organization.UserRole;
+
 public class Context {
 
 	private Long userId;
 	
 	private String ipAddress;
 	
-	private String userRole;
+	private UserRole userRole;
 	
-	private String loggedTime;
+	private Long loginTime;
 	
 	private String redisId;
 	
 	private String clientType;
 	
-	private String rememberMe;
+	private boolean rememberMe;
+	
+	private Long redisTime;
 
 	public Long getUserId() {
 		return userId;
@@ -31,21 +38,21 @@ public class Context {
 	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
 	}
-
-	public String getUserRole() {
+	
+	public UserRole getUserRole() {
 		return userRole;
 	}
 
-	public void setUserRole(String userRole) {
+	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
 
-	public String getLoggedTime() {
-		return loggedTime;
+	public Long getLoginTime() {
+		return loginTime;
 	}
 
-	public void setLoggedTime(String loggedTime) {
-		this.loggedTime = loggedTime;
+	public void setLoginTime(Long loginTime) {
+		this.loginTime = loginTime;
 	}
 
 	public void setRedisId(String redisId) {
@@ -63,20 +70,31 @@ public class Context {
 	public void setClientType(String clientType) {
 		this.clientType = clientType;
 	}
-
-	public String getRememberMe() {
+	
+	public boolean isRememberMe() {
 		return rememberMe;
 	}
 
-	public void setRememberMe(String rememberMe) {
+	public void setRememberMe(boolean rememberMe) {
 		this.rememberMe = rememberMe;
 	}
 
-	@Override
+	public Long getRedisTime() {
+		return redisTime;
+	}
+
+	public void setRedisTime(Long redisTime) {
+		this.redisTime = redisTime;
+	}
+
 	public String toString() {
-		return "Context [userId=" + userId + ", ipAddress=" + ipAddress + ", userRole=" + userRole + ", loggedTime="
-				+ loggedTime + ", redisId=" + redisId + ", clientType=" + clientType + ", rememberMe=" + rememberMe
-				+ "]";
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 }
